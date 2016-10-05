@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pokemon.classes.Pokemon;
 import pokemon.classes.Trainer;
 import pokemon.classes.Type;
+import pokemon.repositories.DataRepository;
 import pokemon.repositories.PokemonRepository;
 import pokemon.repositories.TrainerRepository;
 import pokemon.repositories.TypeRepository;
@@ -39,5 +40,4 @@ public class IndexController {
 //        m.addAttribute("pokemonEvolution", pokemon.getPokemonEvolution());
         return "index";
     }
-
 }

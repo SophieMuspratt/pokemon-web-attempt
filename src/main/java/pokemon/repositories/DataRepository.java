@@ -3,12 +3,14 @@ package pokemon.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import pokemon.classes.Trainer;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 public class DataRepository {
 
@@ -19,14 +21,11 @@ public class DataRepository {
         this.dataSource = dataSource;
     }
 
-    public List<String> getTrainerDetails(){
+    public void addNewTrainerToDB(String name, int age, char gender){
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<String> trainerDetailList = jdbcTemplate.query("SELECT * FROM trainer", new RowMapper<String>(){
-            @Override
-            public String mapRow(ResultSet resultSet, int i) throws SQLException{
-                return resultSet.getString("trainer_name");
-            }
-        });
-        return trainerDetailList;
+        Object[] args = new Object[]{name, age, gender};
+        jdbcTemplate.update("INSERT INTO trainer (name, age, gender) VALUES (?, ?, ?)", args);
     }
+
+
 }
